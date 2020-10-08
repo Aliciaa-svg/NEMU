@@ -209,7 +209,7 @@ int dominant_operator(int p,int q){
     int op=p;
     int left=0;
     int val=-1;
-    if(tokens[p].type==40&&tokens[q].type==41){
+    if(tokens[p].type==40&&tokens[q].type==41&&check_parentheses(p,q)){
             return dominant_operator(p+1,q-1);
     };
     for(i=p;i<=q;i++){

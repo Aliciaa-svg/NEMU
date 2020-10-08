@@ -224,8 +224,15 @@ int dominant_operator(int p,int q){
           }
           if(i>q) break;
        }
-       if(rules[tokens[i].type].priority>val){
-            val=rules[tokens[i].type].priority;
+       int j;
+       for(j=0;j<NR_REGEX;j++){
+            if(rules[j].token_type==tokens[i].type){
+                // index=j;
+                 break;
+             }
+       }
+       if(rules[j].priority>val){
+            val=rules[j].priority;
             op=i;
        }
     }

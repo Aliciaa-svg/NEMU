@@ -209,12 +209,8 @@ int dominant_operator(int p,int q){
     int op=p;
     int left=0;
     int val=-1;
-    if(check_parentheses(p,q)&&tokens[p].type==40&&tokens[q].type==41){
+    if(tokens[p].type==40&&tokens[q].type==41){
             return dominant_operator(p+1,q-1);
-    };
-    if(!check_parentheses(p,q)){
-            printf("illegal input\n");
-            assert(0);
     };
     for(i=p;i<=q;i++){
        if(tokens[i].type==262||tokens[i].type==263||tokens[i].type==264||tokens[i].type==265||tokens[i].type==266) continue;

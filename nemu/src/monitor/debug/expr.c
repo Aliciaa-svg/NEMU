@@ -23,7 +23,7 @@ static struct rule {
 	 * Pay attention to the precedence level of different rules.
 	 */
 
-	{" +",	NOTYPE, 100},				// spaces
+	{" +",	NOTYPE, -1},				// spaces
 	{"\\+", '+', 4},					// plus
 	{"==", EQ, 7},						// equal
         {"\\*",'*', 3},
@@ -35,11 +35,11 @@ static struct rule {
         {"&&", AND, 11},
         {"\\|\\|", OR, 12},
         {"!", NOT, 100},
-        {"0[xX][a-fA-F0-9]{1,8}", HEX,100},
-        {"[0-9]+",NUMBER,100},
-        {"[a-zA-Z][0-9a-zA-Z]*[0-9a-zA-Z]*", VARIABLE, 100},
-        {"\\$[a-dA-D][HhLl]|\\$[eE]?(ax|AX|bx|BX|cx|CX|dx|DX|si|SI|di|DI|bp|BP|sp|SP)", REGISTER, 100},
-        {"\\$[eE][iI][pP]", EIP, 100}
+        {"0[xX][a-fA-F0-9]{1,8}", HEX,-1},
+        {"[0-9]+",NUMBER,-1},
+        {"[a-zA-Z][0-9a-zA-Z]*[0-9a-zA-Z]*", VARIABLE, -1},
+        {"\\$[a-dA-D][HhLl]|\\$[eE]?(ax|AX|bx|BX|cx|CX|dx|DX|si|SI|di|DI|bp|BP|sp|SP)", REGISTER, -1},
+        {"\\$[eE][iI][pP]", EIP, -1}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -208,7 +208,7 @@ int dominant_operator(int p,int q){
     int i;
     int op=p;
     int left=0;
-    int val=99;
+    int val=-1;
     for(i=p;i<=q;i++){
        if(tokens[i].type==262||tokens[i].type==263||tokens[i].type==264||tokens[i].type==265||tokens[i].type==266) continue;
        if(tokens[i].type==40){
@@ -221,7 +221,7 @@ int dominant_operator(int p,int q){
           }
           if(i>q) break;
        }
-       if(rules[tokens[i].type].priority<val){
+       if(rules[tokens[i].type].priority>val){
             val=rules[tokens[i].type].priority;
             op=i;
        }

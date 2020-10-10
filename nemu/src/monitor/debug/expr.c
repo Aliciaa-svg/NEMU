@@ -300,8 +300,8 @@ int eval(int p,int q){
             return !t;
          }
  
-         if((q-p==1)&&(tokens[p].type==45)){
-            return 0-eval(q,q);
+         if(tokens[p].type==45){
+            return 0-eval(p+1,q);
          } 
          if((tokens[p].type==42)&&((q-p==1)||((tokens[p+1].type==40)&&(tokens[q].type==41)))){
             int add=eval(p+1,q);

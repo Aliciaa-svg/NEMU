@@ -304,6 +304,7 @@ int eval(int p,int q){
          }
  
          if(tokens[p].type==45){
+            if((q-p)==1) return 0-eval(q,q);
             return 0-eval(p+1,q);
          } 
          if((tokens[p].type==42)&&((q-p==1)||((tokens[p+1].type==40)&&(tokens[q].type==41)))){

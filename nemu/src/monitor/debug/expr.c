@@ -214,6 +214,9 @@ int dominant_operator(int p,int q){
     };
     for(i=p;i<=q;i++){
        if(tokens[i].type==262||tokens[i].type==263||tokens[i].type==264||tokens[i].type==265||tokens[i].type==266) continue;
+       if(tokens[i].type==45&&(i==p||(tokens[i-1].type!=262)||(tokens[i-1].type!=263)||(tokens[i-1].type!=264)||(tokens[i-1].type!=265)||(tokens[i-1].type!=266)||(tokens[i-1].type!=41))){
+          continue;
+       }
        if(tokens[i].type==40){
           left++;
           i++;

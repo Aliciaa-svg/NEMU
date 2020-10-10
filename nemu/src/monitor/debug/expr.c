@@ -231,7 +231,7 @@ int dominant_operator(int p,int q){
                  break;
              }
        }
-       if(rules[j].priority>val){
+       if(rules[j].priority>=val){
             val=rules[j].priority;
             op=i;
        }
